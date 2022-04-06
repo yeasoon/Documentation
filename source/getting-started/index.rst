@@ -3,11 +3,18 @@
 ========
 新手入门
 ========
+.. meta::
+   :description lang=zh-Hans: 天元 MegEngine 入门教程，适合不同水平、阶段的用户。
+   :description lang=en: MegEngine tutorials for users of all levels.
+   :keywords lang=zh-Hans: 天元, 教程, 课程, 新手入门, 快速上手, 学习, 深度学习
+   :keywords lang=en: MegEngine, deep learning, tutorial, beginner, quick start, learning, crash course
+
 .. toctree::
    :hidden:
 
    quick-start
    beginner/intro
+   deploy/index
 
 我们为带有不同学习需求的用户提供了对应的新手入门教程，共同成长。
 
@@ -44,4 +51,3 @@ MegEngine 可以使用 Python 包管理器 ``pip`` 直接进行安装：
    ^^^^^^^^^^^^^^^^^^^^^^
    如果你想要通过实践 MegEngine 的使用来加深对基础知识的理解，
    我们为你准备了一系列 :ref:`deep-learning` ，希望能有所帮助！
- 

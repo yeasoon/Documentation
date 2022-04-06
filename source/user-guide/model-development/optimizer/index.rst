@@ -16,8 +16,8 @@ MegEngine 的 :py:mod:`optimizer` 模块中实现了大量的优化算法，
    import megengine.optimizer as optim
 
    model = MyModel()
-   gm = GradManager.attach(model.parameters())
-   optimizer = optim.SGD(model.parameters())  # or other optimizers
+   gm = GradManager().attach(model.parameters())
+   optimizer = optim.SGD(model.parameters(), lr=0.01)  # lr may vary with different model
 
    for data, label in dataset:
        with gm:

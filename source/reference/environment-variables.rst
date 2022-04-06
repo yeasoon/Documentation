@@ -15,10 +15,10 @@
 .. note::
 
    MegEngine 中使用的环境变量可分为 “动态” 与 “非动态” 两类：
-   
+
    * 动态环境变量可以动态地进行读取，即在代码运行过程中修改可即时生效。
    * 非动态环境变量在整个过程中只读取一次，后续对其进行修改将无法生效。
-    
+
    对于非动态环境变量，我们会标注为 :ref:`nd-environ` 。
 
 .. _nd-environ:
@@ -41,7 +41,7 @@
         os.environ['MGE_ENV_VAR']="value"  # Put this line before import megengine
 
         import megengine  # Read some environment variables
-   
+
 
 编译相关
 --------
@@ -169,13 +169,13 @@ DTR 相关
   设置为 0 将使 MegEngine 上层的任务队列变成同步执行，即 Python 调用一个 Op, C++ 层执行一个 Op,
   没执行完前 Python 层不会走到下一句，便于定位 Python 层报错的位置，但会影响速度。
 
+``MEGENGINE_ASYNC_QUEUE_SIZE`` （ :ref:`nd-environ` ）
+  异步队列的大小，默认值为 ``10000``。增加该值会发现内存占用持续增长，是正常现象。
+
 ``MEGENGINE_CATCH_WORKER_EXEC`` （ :ref:`nd-environ` ）
   是否捕获动态图 worker 的异常，默认开启，Debug 时可将其关闭。
 
   设置为 ``0`` 表示关闭，为 ``1`` 表示开启。
-
-``MEGENGINE_COMMAND_BUFFER_LENGTH`` （ :ref:`nd-environ` ）
-  延迟执行最后面计算算子的个数（默认为 ``3`` ），用于做局部优化。
 
 ``MEGENGINE_RECORD_COMPUTING_PATH`` （ :ref:`nd-environ` ）
   是否记录 tensor 的历史计算路径，默认关闭。
@@ -203,17 +203,23 @@ DTR 相关
 
   默认从 ``PATH``, ``LIBRARY_PATH`` 环境变量中寻找，也可人为指定路径如 ``"/data/opt/cuda/bin/"``.
 
-``MGB_JIT_BACKEND`` 
+``MGB_JIT_BACKEND``
   jit fuse kernel 的编译后端选项，可设置为 ``HALIDE``, ``NVRTC``, ``MLIR``.
 
 ``MGB_JIT_KEEP_INTERM`` （ :ref:`nd-environ` ）
   是否保存 jit 产生的临时文件，默认为空，不保存。
 
 ``MGB_JIT_WORKDIR`` （ :ref:`nd-environ` ）
-  jit 产生的临时文件目录路径，默认为 ``/tmp/mgbjit-XXXXXX``. 
+  jit 产生的临时文件目录路径，默认为 ``/tmp/mgbjit-XXXXXX``.
 
 ``MGB_DUMP_INPUT`` （ :ref:`nd-environ` ）
   是否在 Dump 的同时导出每个算子时输入值，默认为空，不开启。
+
+``MGE_FASTRUN_CACHE_TYPE`` （ :ref:`nd-environ` ）
+  使用何种方式存储 fastrun cache, 可设置为 ``FILE`` （进程退出时会将内容保存到文件里）或 ``MEMORY`` （不保存）
+
+``MGE_FASTRUN_CACHE_DIR`` （ :ref:`nd-environ` ）
+  更改 fastrun cache 的存储路径，默认为 ``~/.cache/megengine/persistent_cache``
 
 调试相关
 --------

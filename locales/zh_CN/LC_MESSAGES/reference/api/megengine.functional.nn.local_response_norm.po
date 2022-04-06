@@ -1,63 +1,64 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) 2020-2021, The MegEngine Open Source Team
-# This file is distributed under the same license as the MegEngine package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2021.
-#
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: MegEngine 1.7\n"
+"Project-Id-Version: megengine\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-12-08 20:45+0800\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2022-03-17 20:48\n"
+"Last-Translator: \n"
+"Language-Team: Chinese Simplified\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.4.0\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Crowdin-Project: megengine\n"
+"X-Crowdin-Project-ID: 450980\n"
+"X-Crowdin-Language: zh-CN\n"
+"X-Crowdin-File: /[MegEngine.Documentation] main/locales/zh_CN/LC_MESSAGES/reference/api/megengine.functional.nn.local_response_norm.po\n"
+"X-Crowdin-File-ID: 8227\n"
+"Language: zh_CN\n"
 
 #: ../../source/reference/api/megengine.functional.nn.local_response_norm.rst:2
 msgid "megengine.functional.nn.local\\_response\\_norm"
-msgstr ""
+msgstr "megengine.functional.nn.local\\_response\\_norm"
 
 #: megengine.functional.nn.local_response_norm:1 of
 msgid "Apply local response normalization to the input tensor."
-msgstr ""
+msgstr "对输入 Tensor 进行局部响应归一化。"
 
 #: megengine.functional.nn.local_response_norm of
 msgid "参数"
-msgstr ""
+msgstr "参数"
 
 #: megengine.functional.nn.local_response_norm:4 of
 msgid "the size of the kernel to apply LRN on."
-msgstr ""
+msgstr "归一化时核的尺寸。"
 
 #: megengine.functional.nn.local_response_norm:6 of
 msgid "hyperparameter k. The default vaule is 2.0."
-msgstr ""
+msgstr "超参数 k。默认：2.0"
 
 #: megengine.functional.nn.local_response_norm:8 of
 msgid "hyperparameter alpha. The default value is 1e-4."
-msgstr ""
+msgstr "超参数 alpha。默认：1e-4"
 
 #: megengine.functional.nn.local_response_norm:10 of
 msgid "hyperparameter beta. The default value is 0.75."
-msgstr ""
+msgstr "超参数 beta。默认：0.75"
 
 #: megengine.functional.nn.local_response_norm:12 of
 msgid "Example:"
-msgstr ""
+msgstr "例如："
 
 #: megengine.functional.nn.local_response_norm:31 of
 msgid "Outputs:"
-msgstr ""
+msgstr "输出："
 
 #: megengine.functional.nn.local_response_norm of
 msgid "返回类型"
-msgstr ""
+msgstr "返回类型"
 
 #: megengine.functional.nn.local_response_norm:39 of
 msgid ":py:class:`~megengine.tensor.Tensor`"
-msgstr ""
+msgstr ":py:class:`~megengine.tensor.Tensor`"
 

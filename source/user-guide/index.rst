@@ -3,11 +3,16 @@
 ========
 用户指南
 ========
+.. meta::
+   :description lang=zh-Hans: 天元 MegEngine 用户指南，能够引导用户在不同需求下完成相应的目标。
+   :description lang=en: MegEngine guides that help users accomplish the corresponding goals in different situations.
+   :keywords lang=zh-Hans: 天元, 深度学习, 指南, 用户指南, 使用手册, 案例, 示范, 如何完成
+   :keywords lang=en: MegEngine, deep learning, guide, user guide, how-to, example, step-by-step
+
 .. toctree::
    :hidden:
    :maxdepth: 1
 
-   about/index
    install/index
    transfer-from/index
    faq/index
@@ -36,18 +41,18 @@
    model-development/quantization/index
    model-development/amp/index
    model-development/profiler/index
+   model-development/traced_module/index
    model-development/jit/index
 
 .. toctree::
    :caption: 推理部署篇
    :hidden:
    :maxdepth: 1
-   
+
    deployment/index
-   deployment/traced_module/index
    deployment/lite/index
-   deployment/lite_interface/index
-   deployment/lite_advance/index
+   deployment/lite/interface/index
+   deployment/lite/advance/index
 
 .. toctree::
    :caption: 工具与插件篇
@@ -118,7 +123,7 @@ MegEngine Cookbook
 .. dropdown:: :fa:`eye,mr-1` 如何对 MegEngine 的功能进行拓展？
 
    * 如果你希望为 MegEngine 添加新的算子，请参考 :ref:`add-an-operator` 。
-   * 如果你希望参与到 MegEngine 的开发中来，请参考 :ref:`development`  
+   * 如果你希望参与到 MegEngine 的开发中来，请参考 :ref:`development`
 
 寻求更多支持
 ------------

@@ -3,6 +3,12 @@
 ========
 API 参考
 ========
+.. meta::
+   :description lang=zh-Hans: 天元 MegEngine API 定义与使用介绍，提供权威参考信息。
+   :description lang=en: MegEngine API manual and official reference.
+   :keywords lang=zh-Hans: 天元, 深度学习, 接口, 规格, 定义, 查询, 引用, 参考, 用例
+   :keywords lang=en: MegEngine, deep learning, interface, specification, define, reference, example
+
 :对应版本: |version|
 :更新时间: |today|
 
@@ -14,6 +20,10 @@ Python API
 .. note::
 
    MegEngine 在 GitHub 上的 Python 包源码位置在：:src:`imperative/python/megengine`
+
+   WEB 文档中仅仅列举出了面向用户提供的公开接口，并提供兼容性保证。
+   私有模块（如 Core）以及不做兼容性保证的模块（如 Utils）中的接口将不会在此出现，
+   但你始终可以在源码中找到它们。
 
 .. note::
 
@@ -42,10 +52,10 @@ Python API
    dtr
    distributed
    quantization
-   random
    traced_module
    hub
-   utils
+   random
+   config
 
 .. toctree::
    :caption: API 相关说明

@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: megengine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-08 21:51+0800\n"
-"PO-Revision-Date: 2021-11-09 08:03\n"
+"POT-Creation-Date: 2021-12-28 09:14+0000\n"
+"PO-Revision-Date: 2022-03-01 05:25\n"
 "Last-Translator: \n"
 "Language: zh_CN\n"
 "Language-Team: Chinese Simplified\n"
@@ -11,16 +11,16 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.4.0\n"
+"Generated-By: Babel 2.9.1\n"
 "X-Crowdin-Project: megengine\n"
 "X-Crowdin-Project-ID: 450980\n"
 "X-Crowdin-Language: zh-CN\n"
 "X-Crowdin-File: /[MegEngine.Documentation] main/locales/zh_CN/LC_MESSAGES/reference/api/megengine.autodiff.GradManager.po\n"
 "X-Crowdin-File-ID: 6588\n"
 
-#: ../../source/reference/api/megengine.autodiff.GradManager.rst:2
-msgid "megengine.autodiff.GradManager"
-msgstr ""
+#: ../../source/reference/api/megengine.autodiff.GradManager.rst:5
+msgid "GradManager"
+msgstr "GradManager"
 
 #: megengine.autodiff.grad_manager.GradManager:1 of
 msgid "GradManager computes gradients or more generally, vector-Jacobian product, by reverse mode automatic differentiation (a.k.a. back propagation)."
@@ -58,47 +58,119 @@ msgstr "可变张量在执行符号微分时引入歧义：我们指的是 Tenso
 msgid "Typically, in data parallel, we would like to average the gradients across processes. Users will finally get the averaged gradients if an \"AllReduce\" callback is registered as follows:"
 msgstr "通常，在数据并行的时候，我们需要跨进程计算梯度的均值。使用者最终可获得平均的梯度若一个 “AllReduce” 回调函数像下面一样被注册的话："
 
-#: ../../source/reference/api/megengine.autodiff.GradManager.rst:15
-msgid "Methods"
-msgstr "方法"
-
-#: ../../source/reference/api/megengine.autodiff.GradManager.rst:33:<autosummary>:1
-msgid ":obj:`attach <megengine.autodiff.GradManager.attach>`\\ \\(tensors\\[\\, callbacks\\]\\)"
-msgstr ""
-
-#: ../../source/reference/api/megengine.autodiff.GradManager.rst:33:<autosummary>:1
+#: megengine.autodiff.grad_manager.GradManager.attach:1 of
 msgid "Instruct GradManager to track operations on tensors, so that gradients with respect to those tensors could be evaluated later."
 msgstr "指示 GradManager 跟踪张量上的操作，以便那些张量上的梯度，可以在之后进行计算。"
 
-#: ../../source/reference/api/megengine.autodiff.GradManager.rst:33:<autosummary>:1
-msgid ":obj:`attached_tensors <megengine.autodiff.GradManager.attached_tensors>`\\ \\(\\)"
-msgstr ""
+#: megengine.autodiff.grad_manager.GradManager.attach:4 of
+msgid ":meth:`attach` also accepts a list of callbacks, which will be called with the tensor and its gradient during :meth:`backward`. The signature of callbacks should look like:"
+msgstr ":meth:`attach` 也接受一个回调函数的列表，在 :meth:`backward` 的过程中，这些回调函数会被以 Tensor 和其梯度作为参数调用 。回调函数的签名应该如下："
 
-#: ../../source/reference/api/megengine.autodiff.GradManager.rst:33:<autosummary>:1
+#: megengine.autodiff.grad_manager.GradManager.attach:15 of
+msgid ":meth:`attach` calls with overlapping tensors will result in their callbacks concatenated, independently for each tensor. For example,"
+msgstr "多次 :meth:`attach` 调用的 Tensor 列表如果有重叠，那么这些 Tensor 对应的回调函数列表会被拼接，此操作对每个 Tensor 独立作用。例如，"
+
+#: megengine.autodiff.grad_manager.GradManager.attach:23 of
+msgid "is equivalent to"
+msgstr "等价于"
+
+#: megengine.autodiff.grad_manager.GradManager.attach:30 of
+msgid "The effect of :meth:`attach` will persist across multiple uses of the GradManager. When reusing a GradManager, it is likely a mistake to call :meth:`attach` on the same set of tensors and callbacks repeatedly, which may grow the callback list indefinitely."
+msgstr "调用 :meth:`attach` 之后，不仅会在当此求导中生效，也会同一个 GradManager 之后的所有求导中生效。在用同一个 GradManager 进行多次求导时，用相同的参数反复调用 :meth:`attach` 很可能是一个错误，这会导致回调函数的列表的长度一直增长。"
+
+#: megengine.autodiff.grad_manager.GradManager.attach:36 of
+msgid "When reusing a GradManager, it is sometimes desirable to attach temporary tensors each time, e.g. for computing gradients of inputs of a neural network. GradManager tries to accommodate such usages by holding weak references to attached tensors. Most of the times, this should be enough to prevent resource leak. Unfortunately, there are still some pitfalls left:"
+msgstr "在重复使用同一个 GradManager 的同时，您可能会希望对一些临时的 Tensor 求导，例如对神经网络的输入求导。考虑到这种用法，GradManager 会对 attached Tensor 持有弱引用。在大多数时候，这已经可以避免资源泄漏。但是，仍然有少数情况需要您注意："
+
+#: megengine.autodiff.grad_manager.GradManager.attach:42 of
+msgid "Callbacks should not hold strong references, directly or indirectly, to attached tensors. Any strong reference, including those from callbacks, will prevent garbage collection (even by the cycle collector!) of a attached tensor, until the GradManager object is garbage collected."
+msgstr "回调函数不应该持有被 attached  Tensor 的强引用，无论是直接地还是间接地。任何强引用，包括来自回调函数的强引用，都会导致 attached Tensor 无法被垃圾回收（即使运行可回收引用循环的完整垃圾回收！），直到 GradManager 对象本身被垃圾回收为止。"
+
+#: megengine.autodiff.grad_manager.GradManager.attach:47 of
+msgid "Please also note that GradManager might hold additional strong references to attached tensors when it is in use. This note only covers potential resource leaks across multiple uses of a GradManager, which is unrelated to whether resources is timely released within a single use."
+msgstr "还需注意的一点是 GradManager 如果正在进行求导，可能会持有对被 attached Tensor 的强引用。本注解仅针对将一个 GradManager 用于多次求导可能引发的资源泄漏，并不涉及在进行一次求导时资源是否被第一时间释放的问题。"
+
+#: megengine.autodiff.grad_manager.GradManager.attach
+#: megengine.autodiff.grad_manager.GradManager.backward of
+msgid "参数"
+msgstr "参数"
+
+#: megengine.autodiff.grad_manager.GradManager.attach:53 of
+msgid "tensor or list of tensors to track"
+msgstr "需要跟踪的 Tensor 或者 Tensor 列表"
+
+#: megengine.autodiff.grad_manager.GradManager.attach:54 of
+msgid "callback or list of callbacks"
+msgstr "回调函数或回调函数的列表"
+
+#: megengine.autodiff.grad_manager.GradManager.attached_tensors:1 of
 msgid "Return attached tensor list from :meth:`attach`."
-msgstr ""
+msgstr "返回通过 :meth:`attach` 方法得到的已绑定张量列表。"
 
-#: ../../source/reference/api/megengine.autodiff.GradManager.rst:33:<autosummary>:1
-msgid ":obj:`backward <megengine.autodiff.GradManager.backward>`\\ \\(\\[y\\, dy\\]\\)"
-msgstr ""
-
-#: ../../source/reference/api/megengine.autodiff.GradManager.rst:33:<autosummary>:1
+#: megengine.autodiff.grad_manager.GradManager.backward:1 of
 msgid "Compute gradients (or vector-Jacobian product) for all attached tensors, accumulate to corresponding .grad attribute, and release resources along the way."
 msgstr "对所有 attached Tensor 计算梯度 (或向量-雅可比积)，并将其积累到对应 Tensor 的 .grad 属性中，在过程中释放资源。"
 
-#: ../../source/reference/api/megengine.autodiff.GradManager.rst:33:<autosummary>:1
-msgid ":obj:`record <megengine.autodiff.GradManager.record>`\\ \\(\\)"
-msgstr ""
+#: megengine.autodiff.grad_manager.GradManager.backward:4 of
+msgid ":meth:`backward` computes the vector-Jacobian product :math:`dx_j = \\sum_{i} dy_i J_{ij}` where :math:`J_{ij} = ∂y_i/∂x_j` is the Jacobian matrix between vector variables :math:`y` and :math:`x`, with all vectors involved represented as a list of tensors, in the sense of direct sums (or flatten-and-concatenate). :math:`y` and :math:`dy` are passed as the first and second parameter respectively, whereas :math:`x` is directly taken from the list of all attached tensors. The result :math:`dx` is also not returned. Instead, it is directly accumulated into the .grad attribute of matching attached tensors (a.k.a. :math:`x`). This can be done unambiguously since :math:`dx` as a list of tensors has the same structure as :math:`x`."
+msgstr ":meth:`backward` 计算向量-雅可比积 :math:`dx_j = \\sum_{i} dy_i J_{ij}` ，其中 :math:`J_{ij} = ∂y_i/∂x_j` 是向量变量 :math:`y` 和 :math:`x` 的雅可比矩阵，涉及的所有向量都在向量空间直和 (或展平并拼接) 的意义下表示为 Tensor 的列表。:math:`y` and :math:`dy` 分别是第一和第二个参数，:math:`x` 则由所有 attached Tensor 的列表形成。计算的结果 :math:`dx` 不作为返回值，而是直接积累到对应 Tensor (即 :math:`x`) 的 .grad 属性上。这个对应可以无歧义地完成，因为 :math:`dx` 作为 Tensor 的列表和 :math:`x` 有着相同的结构。"
 
-#: ../../source/reference/api/megengine.autodiff.GradManager.rst:33:<autosummary>:1
+#: megengine.autodiff.grad_manager.GradManager.backward:14 of
+msgid "If :math:`y` is a scalar and :math:`dy` is chosen to be 1, the vector-Jacobian product yield gradient of :math:`y` with repect to :math:`x` as a special case. In that case, you will be able to omit the :math:`dy` parameter and :meth:`backward` will automatically use 1 for it and compute the gradient."
+msgstr "如果 :math:`y` 是一个标量而 :math:`dy` 被取为 1，那么向量-雅可比积的结果恰好就是 :math:`y` 对 :math:`x` 的梯度。在这种情况下，您可以省略 :math:`dy` 参数，:meth:`backward` 会自动使用 1 作为它的值并计算梯度。"
+
+#: megengine.autodiff.grad_manager.GradManager.backward:19 of
+msgid ":meth:`backward` consumes all resources held by this GradManager and releases them in the process of this call. When the call successfully finishes, the GradManager will be put back to an inactive state."
+msgstr ":meth:`backward` 会随计算的进行释放 GradManager 持有的所有资源。在函数调用成功返回后，GradManager 会回到非活跃的状态。"
+
+#: megengine.autodiff.grad_manager.GradManager.backward:24 of
+msgid "tensor or list of tensors"
+msgstr "Tensor 或 Tensor 的列表"
+
+#: megengine.autodiff.grad_manager.GradManager.backward:26 of
+msgid "tensor or list of tensors. Defaults to 1 if y is scalar"
+msgstr "Tensor 或 Tensor 的列表。如果 y 是标量，有默认值 1"
+
+#: megengine.autodiff.grad_manager.GradManager.record:1 of
 msgid "Start recording operations"
 msgstr "开始记录操作"
 
-#: ../../source/reference/api/megengine.autodiff.GradManager.rst:33:<autosummary>:1
-msgid ":obj:`release <megengine.autodiff.GradManager.release>`\\ \\(\\)"
-msgstr ""
+#: megengine.autodiff.grad_manager.GradManager.record:3 of
+msgid "After this call, you will be able to call :meth:`backward`."
+msgstr "在此调用后，您将可以调用 :meth:`backward`。"
 
-#: ../../source/reference/api/megengine.autodiff.GradManager.rst:33:<autosummary>:1
+#: megengine.autodiff.grad_manager.GradManager.release:1 of
 msgid "Stop recording operations and release resources kept for gradient computation"
 msgstr "停止记录操作并释放为计算梯度而保留的资源"
+
+#: megengine.autodiff.grad_manager.GradManager.release:3 of
+msgid "After this call, you will not be able to call :meth:`backward`."
+msgstr "在此调用后，您将不能调用 :meth:`backward`。"
+
+#~ msgid "megengine.autodiff.GradManager"
+#~ msgstr ""
+
+#~ msgid "Methods"
+#~ msgstr "方法"
+
+#~ msgid ""
+#~ ":obj:`attach <megengine.autodiff.GradManager.attach>`\\ "
+#~ "\\(tensors\\[\\, callbacks\\]\\)"
+#~ msgstr ""
+
+#~ msgid ""
+#~ ":obj:`attached_tensors "
+#~ "<megengine.autodiff.GradManager.attached_tensors>`\\ \\(\\)"
+#~ msgstr ""
+
+#~ msgid ""
+#~ ":obj:`backward <megengine.autodiff.GradManager.backward>`\\ "
+#~ "\\(\\[y\\, dy\\]\\)"
+#~ msgstr ""
+
+#~ msgid ":obj:`record <megengine.autodiff.GradManager.record>`\\ \\(\\)"
+#~ msgstr ""
+
+#~ msgid ":obj:`release <megengine.autodiff.GradManager.release>`\\ \\(\\)"
+#~ msgstr ""
 

@@ -1,4 +1,11 @@
 {% extends "layout.html" %}
+{%- block extrahead -%}
+<meta content="天元 MegEngine 官方文档" lang="zh-Hans" name="description" xml:lang="zh-Hans" />
+<meta content="MegEngine official documentation" lang="en" name="description" xml:lang="en" />
+<meta content="天元, 深度学习, 深度学习框架, 文档, 教程, 参考, 开发, 旷视科技" lang="zh-Hans" name="keywords" xml:lang="zh-Hans" />
+<meta content="MegEngine, deep learning, deep learning framework, documentation, tutorial, reference, development, megvii" lang="en" name="keywords" xml:lang="en" />
+{%- endblock -%}
+
 {%- block htmltitle -%}
 <title>{{ shorttitle }}</title>
 {%- endblock -%}
@@ -10,8 +17,6 @@
   <p><strong>{% trans %}经常被访问的页面：{% endtrans %}</strong></p>
   <table class="contentstable" align="center"><tr>
     <td width="50%">
-      <p clas="biglink"><a class="biglink" href="{{ pathto("user-guide/about/index") }}">{% trans %}关于 MegEngine{% endtrans %}</a><br/>
-         <span class="linkdescr">{% trans %}了解 MegEngine 背后的故事{% endtrans %}</span></p>
       <p clas="biglink"><a class="biglink" href="{{ pathto("getting-started/index") }}">{% trans %}新手入门{% endtrans %}</a><br/>
          <span class="linkdescr">{% trans %}学习如何使用 MegEngine 中的各种功能{% endtrans %}</span></p>
       <p class="biglink"><a class="biglink" href="{{ pathto("user-guide/index") }}">{% trans %}用户指南{% endtrans %}</a><br/>
@@ -29,8 +34,6 @@
          <span class="linkdescr">{% trans %}了解藏在 MegEngine 内部的秘密{% endtrans %}</span></p>
       <p class="biglink"><a class="biglink" href="{{ pathto("development/meps") }}">{% trans %}MegEngine 增强提案{% endtrans %}</a><br/>
          <span class="linkdescr">{% trans %}MEP -- 昨天，今天与明天{% endtrans %}</span></p>
-      <p class="biglink"><a class="biglink" href="{{ pathto("user-guide/about/ecosystem") }}">{% trans %}MegEngine 生态{% endtrans %}</a><br/>
-         <span class="linkdescr">{% trans %}认识 MegEngine 大家庭中的其它成员{% endtrans %}</span></p>
     </td></tr>
   </table>
   </br>

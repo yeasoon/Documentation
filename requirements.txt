@@ -1,5 +1,5 @@
-# Cache key for GitHub Actions: 20210928
-sphinx==4.2.0
+# Cache key for GitHub Actions: v1.8.1
+sphinx==4.3.2
 sphinx-autobuild
 sphinx-intl
 sphinxcontrib-mermaid
